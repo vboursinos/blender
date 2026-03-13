@@ -467,8 +467,10 @@ struct BMLoopNorEditDataArray {
   int totloop;
 };
 
-#define BM_ALL (BM_VERT | BM_EDGE | BM_LOOP | BM_FACE)
-#define BM_ALL_NOLOOP (BM_VERT | BM_EDGE | BM_FACE)
+enum {
+  BM_ALL = (BM_VERT | BM_EDGE | BM_LOOP | BM_FACE),
+  BM_ALL_NOLOOP = (BM_VERT | BM_EDGE | BM_FACE),
+};
 
 /** #BMesh.spacearr_dirty */
 enum {
