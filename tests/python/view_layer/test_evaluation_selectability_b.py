@@ -8,6 +8,8 @@
 
 import unittest
 
+import bpy
+
 from view_layer_common import (
     ViewLayerTesting,
     setup_extra_arguments,
@@ -23,8 +25,6 @@ class UnitTesting(ViewLayerTesting):
         """
         See if the depsgraph evaluation is correct
         """
-        import bpy
-
         scene = bpy.context.scene
         window = bpy.context.window
         cube = bpy.data.objects.new('guinea pig', bpy.data.meshes.new('mesh'))

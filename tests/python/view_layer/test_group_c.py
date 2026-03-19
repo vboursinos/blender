@@ -8,6 +8,8 @@
 
 import unittest
 
+import bpy
+
 from view_layer_common import (
     ViewLayerTesting,
     setup_extra_arguments,
@@ -24,13 +26,12 @@ class UnitTesting(ViewLayerTesting):
         More advanced creation of group from a collection not directly linked
         to the scene layer.
         """
-        import bpy
         scene = bpy.context.scene
 
         # clean slate
         self.cleanup_tree()
 
-        children = [bpy.data.objects.new("Child", None) for i in range(3)]
+        children = [bpy.data.objects.new("Child", None) for _ in range(3)]
         master_collection = scene.master_collection
 
         grandma_scene_collection = master_collection.collections.new('Grand-Mother')

@@ -20,7 +20,7 @@ from view_layer_common import (
 
 class UnitTesting(MoveSceneCollectionTesting):
     def get_reference_scene_tree_map(self):
-        reference_tree_map = [
+        return [
             ['A', [
                 ['i', None],
                 ['ii', None],
@@ -36,7 +36,6 @@ class UnitTesting(MoveSceneCollectionTesting):
                 ]],
             ]],
         ]
-        return reference_tree_map
 
     def test_scene_collection_into(self):
         """

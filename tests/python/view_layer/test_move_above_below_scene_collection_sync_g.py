@@ -6,6 +6,7 @@
 # Importing - Same For All Render Layer Tests
 # ############################################################
 
+import sys
 import unittest
 
 from view_layer_common import (
@@ -46,4 +47,4 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
 
 if __name__ == '__main__':
     UnitTesting._extra_arguments = setup_extra_arguments(__file__)
-    unittest.main()
+    unittest.main(argv=sys.argv)

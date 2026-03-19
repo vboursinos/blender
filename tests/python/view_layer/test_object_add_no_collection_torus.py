@@ -13,6 +13,8 @@ from view_layer_common import (
     setup_extra_arguments,
 )
 
+# This test checks that when adding a TORUS object without an explicit collection,
+# the object is assigned to the appropriate collection in the view layer.
 
 # ############################################################
 # Testing

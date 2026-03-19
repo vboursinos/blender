@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
-
+#
 # ############################################################
 # Importing - Same For All Render Layer Tests
 # ############################################################
@@ -25,7 +25,8 @@ class UnitTesting(MoveSceneCollectionTesting):
 
     def test_scene_collection_move_a(self):
         """
-        Test outliner operations
+        Test outliner operations: attempting to move 'dog' above 'cat' should fail
+        and the scene collection tree should remain unchanged.
         """
         tree = self.setup_tree()
         self.assertFalse(tree['dog'].move_above(tree['cat']))
@@ -33,7 +34,8 @@ class UnitTesting(MoveSceneCollectionTesting):
 
     def test_scene_collection_move_b(self):
         """
-        Test outliner operations
+        Test outliner operations: attempting to move 'cat' below 'dog' should fail
+        and the scene collection tree should remain unchanged.
         """
         tree = self.setup_tree()
         self.assertFalse(tree['cat'].move_below(tree['dog']))

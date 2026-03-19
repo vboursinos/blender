@@ -26,12 +26,18 @@ class UnitTesting(ViewLayerTesting):
         import bpy
 
         scene = bpy.context.scene
-        window = bpy.context.window
+        # Acquire a usable window to assign the new view layer; fall back gracefully if not available
+        window = getattr(bpy.context, "window", None)
+        if window is None:
+            wm = getattr(bpy.context, "window_manager", None)
+            if wm is not None and getattr(wm, "windows", None):
+                window = wm.windows[0]
         cube = bpy.data.objects.new('guinea pig', bpy.data.meshes.new('mesh'))
 
         layer = scene.view_layers.new('Visibility Test')
         layer.collections.unlink(layer.collections[0])
-        window.view_layer = layer
+        if window is not None:
+            window.view_layer = layer
 
         scene_collection_mom = scene.master_collection.collections.new("Mom")
         scene_collection_kid = scene_collection_mom.collections.new("Kid")

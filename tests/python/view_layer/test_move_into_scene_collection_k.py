@@ -28,7 +28,8 @@ class UnitTesting(MoveSceneCollectionTesting):
         Test outliner operations
         """
         tree = self.setup_tree()
-        self.assertFalse(tree['C'].move_into(tree['2']))
+        result = tree['C'].move_into(tree['2'])
+        self.assertFalse(result, "Moving 'C' into '2' should be disallowed; the tree should remain unchanged.")
         self.compare_tree_maps()
 
 

@@ -28,140 +28,148 @@ set(TEST_BLENDER_EXE
 
 # ------------------------------------------------------------------------------
 
-macro(view_layer_test test_name)
+function(view_layer_test test_name)
   # Adds ${CMAKE_CURRENT_LIST_DIR} to sys.path so that the tests can import
   # things from view_layer_common.py
-  add_test(view_layer_${test_name} ${TEST_BLENDER_EXE}
+  add_test(
+    NAME view_layer_${test_name}
+    COMMAND ${TEST_BLENDER_EXE}
     --python-expr "import sys; sys.path.append('${CMAKE_CURRENT_LIST_DIR}')"
     --python-exit-code 1
     --python ${CMAKE_CURRENT_LIST_DIR}/test_${test_name}.py --
     --testdir="${TEST_SRC_DIR}/layers"
   )
-endmacro()
+endfunction()
 
-view_layer_test(active_collection)
-view_layer_test(background_set)
-view_layer_test(collection_new_sync)
-view_layer_test(collection_rename_a)
-view_layer_test(collection_rename_b)
-# view_layer_test(evaluation_render_settings_a)
-# view_layer_test(evaluation_render_settings_b)
-# view_layer_test(evaluation_render_settings_c)
-# view_layer_test(evaluation_render_settings_d)
-# view_layer_test(evaluation_render_settings_e)
-# view_layer_test(evaluation_render_settings_f)
-# view_layer_test(evaluation_render_settings_g)
-# view_layer_test(evaluation_render_settings_h)
-# view_layer_test(evaluation_render_settings_i)
-view_layer_test(evaluation_visibility_a)
-view_layer_test(evaluation_visibility_b)
-view_layer_test(evaluation_visibility_c)
-view_layer_test(evaluation_visibility_d)
-view_layer_test(evaluation_visibility_e)
-view_layer_test(evaluation_visibility_f)
-view_layer_test(evaluation_visibility_g)
-view_layer_test(evaluation_visibility_h)
-view_layer_test(evaluation_visibility_i)
-view_layer_test(evaluation_visibility_j)
-view_layer_test(evaluation_selectability_a)
-view_layer_test(evaluation_selectability_b)
-view_layer_test(evaluation_selectability_c)
-view_layer_test(evaluation_selectability_d)
-view_layer_test(evaluation_selectability_e)
-view_layer_test(evaluation_selectability_f)
-view_layer_test(group_a)
-view_layer_test(group_b)
-view_layer_test(group_c)
-view_layer_test(group_d)
-view_layer_test(group_e)
-view_layer_test(object_add_cylinder)
-view_layer_test(object_add_empty)
-view_layer_test(object_add_torus)
-view_layer_test(object_add_no_collection_cylinder)
-view_layer_test(object_add_no_collection_empty)
-view_layer_test(object_add_no_collection_torus)
-view_layer_test(object_copy)
-view_layer_test(object_delete_a)
-view_layer_test(object_delete_b)
-view_layer_test(object_link_a)
-view_layer_test(object_link_b)
-view_layer_test(object_link_c)
-view_layer_test(operator_context)
-view_layer_test(make_single_user)
-view_layer_test(move_above_below_scene_collection_a)
-view_layer_test(move_above_below_scene_collection_b)
-view_layer_test(move_above_below_scene_collection_c)
-view_layer_test(move_above_below_scene_collection_d)
-view_layer_test(move_above_below_scene_collection_e)
-view_layer_test(move_above_below_scene_collection_f)
-view_layer_test(move_above_below_scene_collection_g)
-view_layer_test(move_above_below_scene_collection_h)
-view_layer_test(move_above_below_scene_collection_i)
-view_layer_test(move_above_below_scene_collection_sync_a)
-view_layer_test(move_above_below_scene_collection_sync_b)
-view_layer_test(move_above_below_scene_collection_sync_c)
-view_layer_test(move_above_below_scene_collection_sync_d)
-view_layer_test(move_above_below_scene_collection_sync_e)
-view_layer_test(move_above_below_scene_collection_sync_f)
-view_layer_test(move_above_below_scene_collection_sync_g)
-view_layer_test(move_above_below_scene_collection_sync_h)
-view_layer_test(move_above_below_scene_collection_sync_i)
-view_layer_test(move_into_scene_collection_a)
-view_layer_test(move_into_scene_collection_b)
-view_layer_test(move_into_scene_collection_c)
-view_layer_test(move_into_scene_collection_d)
-view_layer_test(move_into_scene_collection_e)
-view_layer_test(move_into_scene_collection_f)
-view_layer_test(move_into_scene_collection_g)
-view_layer_test(move_into_scene_collection_h)
-view_layer_test(move_into_scene_collection_i)
-view_layer_test(move_into_scene_collection_j)
-view_layer_test(move_into_scene_collection_k)
-view_layer_test(move_into_scene_collection_l)
-view_layer_test(move_into_scene_collection_sync_a)
-view_layer_test(move_into_scene_collection_sync_b)
-view_layer_test(move_into_scene_collection_sync_c)
-view_layer_test(move_into_scene_collection_sync_d)
-view_layer_test(move_into_scene_collection_sync_e)
-view_layer_test(move_into_scene_collection_sync_f)
-view_layer_test(move_into_scene_collection_sync_g)
-view_layer_test(move_into_scene_collection_sync_h)
-view_layer_test(move_into_scene_collection_sync_i)
-view_layer_test(move_into_scene_collection_sync_j)
-view_layer_test(move_into_scene_collection_sync_k)
-view_layer_test(move_into_scene_collection_sync_l)
-view_layer_test(move_above_below_layer_collection_a)
-view_layer_test(move_above_below_layer_collection_b)
-view_layer_test(move_above_below_layer_collection_c)
-view_layer_test(move_above_below_layer_collection_d)
-view_layer_test(move_above_below_layer_collection_e)
-view_layer_test(move_above_below_layer_collection_f)
-view_layer_test(move_above_below_layer_collection_g)
-view_layer_test(move_above_below_layer_collection_h)
-view_layer_test(move_above_below_layer_collection_i)
-view_layer_test(move_above_below_layer_collection_j)
-view_layer_test(move_above_below_layer_collection_k)
-view_layer_test(move_above_below_layer_collection_l)
-view_layer_test(move_into_layer_collection_a)
-view_layer_test(move_into_layer_collection_b)
-view_layer_test(move_into_layer_collection_c)
-view_layer_test(move_into_layer_collection_d)
-view_layer_test(move_into_layer_collection_e)
-view_layer_test(move_into_layer_collection_f)
-view_layer_test(move_into_layer_collection_g)
-view_layer_test(move_into_layer_collection_h)
-view_layer_test(move_into_layer_collection_i)
-view_layer_test(move_into_layer_collection_j)
-view_layer_test(layer_linking)
-view_layer_test(layer_syncing)
-view_layer_test(scene_collection_delete)
-view_layer_test(scene_copy_a)
-view_layer_test(scene_copy_b)
-view_layer_test(scene_copy_c)
-view_layer_test(scene_copy_d)
-view_layer_test(scene_copy_e)
-view_layer_test(scene_copy_f)
-view_layer_test(scene_delete)
-view_layer_test(scene_objects)
-view_layer_test(scene_write_read)
-view_layer_test(view_layer_rename)
+set(TESTS
+  active_collection
+  background_set
+  collection_new_sync
+  collection_rename_a
+  collection_rename_b
+  # evaluation_render_settings_a
+  # evaluation_render_settings_b
+  # evaluation_render_settings_c
+  # evaluation_render_settings_d
+  # evaluation_render_settings_e
+  # evaluation_render_settings_f
+  # evaluation_render_settings_g
+  # evaluation_render_settings_h
+  # evaluation_render_settings_i
+  evaluation_visibility_a
+  evaluation_visibility_b
+  evaluation_visibility_c
+  evaluation_visibility_d
+  evaluation_visibility_e
+  evaluation_visibility_f
+  evaluation_visibility_g
+  evaluation_visibility_h
+  evaluation_visibility_i
+  evaluation_visibility_j
+  evaluation_selectability_a
+  evaluation_selectability_b
+  evaluation_selectability_c
+  evaluation_selectability_d
+  evaluation_selectability_e
+  evaluation_selectability_f
+  group_a
+  group_b
+  group_c
+  group_d
+  group_e
+  object_add_cylinder
+  object_add_empty
+  object_add_torus
+  object_add_no_collection_cylinder
+  object_add_no_collection_empty
+  object_add_no_collection_torus
+  object_copy
+  object_delete_a
+  object_delete_b
+  object_link_a
+  object_link_b
+  object_link_c
+  operator_context
+  make_single_user
+  move_above_below_scene_collection_a
+  move_above_below_scene_collection_b
+  move_above_below_scene_collection_c
+  move_above_below_scene_collection_d
+  move_above_below_scene_collection_e
+  move_above_below_scene_collection_f
+  move_above_below_scene_collection_g
+  move_above_below_scene_collection_h
+  move_above_below_scene_collection_i
+  move_above_below_scene_collection_sync_a
+  move_above_below_scene_collection_sync_b
+  move_above_below_scene_collection_sync_c
+  move_above_below_scene_collection_sync_d
+  move_above_below_scene_collection_sync_e
+  move_above_below_scene_collection_sync_f
+  move_above_below_scene_collection_sync_g
+  move_above_below_scene_collection_sync_h
+  move_above_below_scene_collection_sync_i
+  move_into_scene_collection_a
+  move_into_scene_collection_b
+  move_into_scene_collection_c
+  move_into_scene_collection_d
+  move_into_scene_collection_e
+  move_into_scene_collection_f
+  move_into_scene_collection_g
+  move_into_scene_collection_h
+  move_into_scene_collection_i
+  move_into_scene_collection_j
+  move_into_scene_collection_k
+  move_into_scene_collection_l
+  move_into_scene_collection_sync_a
+  move_into_scene_collection_sync_b
+  move_into_scene_collection_sync_c
+  move_into_scene_collection_sync_d
+  move_into_scene_collection_sync_e
+  move_into_scene_collection_sync_f
+  move_into_scene_collection_sync_g
+  move_into_scene_collection_sync_h
+  move_into_scene_collection_sync_i
+  move_into_scene_collection_sync_j
+  move_into_scene_collection_sync_k
+  move_into_scene_collection_sync_l
+  move_above_below_layer_collection_a
+  move_above_below_layer_collection_b
+  move_above_below_layer_collection_c
+  move_above_below_layer_collection_d
+  move_above_below_layer_collection_e
+  move_above_below_layer_collection_f
+  move_above_below_layer_collection_g
+  move_above_below_layer_collection_h
+  move_above_below_layer_collection_i
+  move_above_below_layer_collection_j
+  move_above_below_layer_collection_k
+  move_above_below_layer_collection_l
+  move_into_layer_collection_a
+  move_into_layer_collection_b
+  move_into_layer_collection_c
+  move_into_layer_collection_d
+  move_into_layer_collection_e
+  move_into_layer_collection_f
+  move_into_layer_collection_g
+  move_into_layer_collection_h
+  move_into_layer_collection_i
+  move_into_layer_collection_j
+  layer_linking
+  layer_syncing
+  scene_collection_delete
+  scene_copy_a
+  scene_copy_b
+  scene_copy_c
+  scene_copy_d
+  scene_copy_e
+  scene_copy_f
+  scene_delete
+  scene_objects
+  scene_write_read
+  view_layer_rename
+)
+
+foreach(test_name ${TESTS})
+  view_layer_test(${test_name})
+endforeach()

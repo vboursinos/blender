@@ -19,6 +19,8 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(ViewLayerTesting):
+    TORUS = 'TORUS'
+
     def test_syncing_object_add_torus(self):
         """
         See if new objects are added to the correct collection
@@ -27,7 +29,7 @@ class UnitTesting(ViewLayerTesting):
         import os
         ROOT = self.get_root()
         filepath_json = os.path.join(ROOT, 'layers_object_add_torus.json')
-        self.do_object_add(filepath_json, 'TORUS')
+        self.do_object_add(filepath_json, self.TORUS)
 
 
 # ############################################################

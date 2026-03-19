@@ -1,3 +1,4 @@
+
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -47,7 +48,7 @@ class UnitTesting(MoveLayerCollectionTesting):
         Test outliner operations
         """
         self.setup_tree()
-        self.assertTrue(self.move_above('Layer 2.C.3.cat', 'Layer 2.3.dog'))
+        self.assertTrue(self.move_above('Layer 2.C.3.cat', 'Layer 2.C.3.dog'))
         self.compare_tree_maps()
 
     def test_layer_collection_move_b(self):
@@ -62,17 +63,17 @@ class UnitTesting(MoveLayerCollectionTesting):
         collection_original.selectable = False
 
         # collection that will disappear
-        collection_old = self.parse_move('Layer 2.3.cat')
+        collection_old = self.parse_move('Layer 1.C.3.cat')
         collection_old.enabled = False
         collection_old.selectable = True
 
         # move
-        self.assertTrue(self.move_above('Layer 2.C.3.cat', 'Layer 2.3.dog'))
+        self.assertTrue(self.move_above('Layer 2.C.3.cat', 'Layer 2.C.3.dog'))
         self.compare_tree_maps()
 
         # we expect the settings to be carried along from the
         # original layer collection
-        collection_new = self.parse_move('Layer 2.3.cat')
+        collection_new = self.parse_move('Layer 2.C.3.cat')
         self.assertEqual(collection_new.enabled, True)
         self.assertEqual(collection_new.selectable, False)
 

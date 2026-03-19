@@ -23,16 +23,6 @@ __all__ = (
 # ############################################################
 
 
-# UNUSED.
-"""
-def listbase_iter(data, struct, listbase):
-    element = data.get_pointer((struct, listbase, b'first'))
-    while element is not None:
-        yield element
-        element = element.get_pointer(b'next')
-"""
-
-
 def linkdata_iter(collection, data):
     element = collection.get_pointer((data, b'first'))
     while element is not None:
@@ -183,9 +173,7 @@ UPDATE_DIFF = False  # HACK used to update tests when something change
 def compare_files(file_a, file_b):
     import filecmp
 
-    if not filecmp.cmp(
-            file_a,
-            file_b):
+    if not filecmp.cmp(file_a, file_b):
 
         if DUMP_DIFF:
             import subprocess
@@ -221,7 +209,7 @@ class ViewLayerTesting(unittest.TestCase):
         """
         arguments = {}
         for argument in cls._extra_arguments:
-            name, value = argument.split('=')
+            name, value = argument.split('=', 1)
             cls.assertTrue(name and name.startswith("--"), "Invalid argument \"{0}\"".format(argument))
             cls.assertTrue(value, "Invalid argument \"{0}\"".format(argument))
             arguments[name[2:]] = value.strip('"')
@@ -357,10 +345,8 @@ class ViewLayerTesting(unittest.TestCase):
         with tempfile.TemporaryDirectory() as dirpath:
             filepath_layers = os.path.join(ROOT, 'layers.blend')
 
-            (self.path_exists(f) for f in (
-                filepath_layers,
-                filepath_json_reference,
-            ))
+            for f in (filepath_layers, filepath_json_reference):
+                self.path_exists(f)
 
             filepath_saved = os.path.join(dirpath, '{0}.blend'.format(copy_mode))
             filepath_json = os.path.join(dirpath, "{0}.json".format(copy_mode))
@@ -449,7 +435,7 @@ class ViewLayerTesting(unittest.TestCase):
         scene = bpy.context.scene
 
         # delete all objects of the file
-        for ob in bpy.data.objects:
+        for ob in list(bpy.data.objects):
             bpy.data.objects.remove(ob, do_unlink=True)
 
         # real test
@@ -500,12 +486,13 @@ class ViewLayerTesting(unittest.TestCase):
         """
         Rename 'Collection 1' to '1'
         """
-        def strip_name(collection):
-            import re
-            if collection.name.startswith("Default Collection"):
-                collection.name = '1'
+        import re
+
+        def strip_name(coll):
+            if coll.name.startswith("Default Collection"):
+                coll.name = '1'
             else:
-                collection.name = re.findall(r'\d+', collection.name)[0]
+                coll.name = re.findall(r'\d+', coll.name)[0]
 
         if collection is None:
             import bpy
@@ -593,7 +580,7 @@ class MoveSceneCollectionTesting(ViewLayerTesting):
             ret_list.append(new_collection)
 
             if nested_collection.collections:
-                new_collection[1] = list()
+                new_collection[1] = []
                 self.get_scene_tree_map(nested_collection, new_collection[1])
 
         return ret_list
@@ -778,7 +765,7 @@ class Clay:
         bpy.context.window.view_layer = layer
 
         # remove all other layers
-        for layer_iter in self._scene.view_layers:
+        for layer_iter in list(self._scene.view_layers):
             if layer_iter != layer:
                 self._scene.view_layers.remove(layer_iter)
 

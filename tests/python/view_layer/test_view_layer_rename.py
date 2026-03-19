@@ -27,6 +27,7 @@ class UnitTesting(ViewLayerTesting):
         view_layer = bpy.context.view_layer
         print("View layer name: " + view_layer.name)
         view_layer.name = "New Name"
+        self.assertEqual(view_layer.name, "New Name")
 
 
 # ############################################################

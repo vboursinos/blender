@@ -6,7 +6,11 @@
 # Importing - Same For All Render Layer Tests
 # ############################################################
 
+import os
+import tempfile
 import unittest
+
+import bpy
 
 from view_layer_common import (
     ViewLayerTesting,
@@ -23,7 +27,6 @@ class UnitTesting(ViewLayerTesting):
         """
         See if saving/loading is working for groups
         """
-        import bpy
         scene = bpy.context.scene
         layer_collection = bpy.context.layer_collection
 
@@ -37,12 +40,10 @@ class UnitTesting(ViewLayerTesting):
         self.assertEqual(1, bpy.data.groups[0].users)
         self.assertEqual(3, len(bpy.data.groups[0].objects))
 
-        import os
-        import tempfile
         with tempfile.TemporaryDirectory() as dirpath:
             filepath = os.path.join(dirpath, 'layers.blend')
 
-            for i in range(3):
+            for _ in range(3):
                 # save and re-open file
                 bpy.ops.wm.save_mainfile('EXEC_DEFAULT', filepath=filepath)
                 bpy.ops.wm.open_mainfile('EXEC_DEFAULT', filepath=filepath)

@@ -58,7 +58,9 @@ class UnitTesting(MoveLayerCollectionTesting):
         Test outliner operations
         """
         self.setup_tree()
-        self.assertTrue(self.move_below('Layer 2.3', 'Layer 2.C.1'))
+        source = 'Layer 2.3'
+        target = 'Layer 2.C.1'
+        self.assertTrue(self.move_below(source, target))
         self.compare_tree_maps()
 
     def test_layer_collection_move_b(self):
@@ -66,7 +68,9 @@ class UnitTesting(MoveLayerCollectionTesting):
         Test outliner operations
         """
         self.setup_tree()
-        self.assertTrue(self.move_above('Layer 2.3', 'Layer 2.C.2'))
+        source = 'Layer 2.3'
+        target = 'Layer 2.C.2'
+        self.assertTrue(self.move_above(source, target))
         self.compare_tree_maps()
 
     def test_layer_collection_move_c(self):
@@ -76,22 +80,25 @@ class UnitTesting(MoveLayerCollectionTesting):
         self.setup_tree()
 
         # collection that will be moved
-        collection_original = self.parse_move('Layer 2.3')
+        src = 'Layer 2.3'
+        collection_original = self.parse_move(src)
         collection_original.enabled = True
         collection_original.selectable = False
 
         # collection that will disappear
-        collection_old = self.parse_move('Layer 2.C.3')
+        dst_old_path = 'Layer 2.C.3'
+        collection_old = self.parse_move(dst_old_path)
         collection_old.enabled = False
         collection_old.selectable = True
 
         # move
-        self.assertTrue(self.move_below('Layer 2.3', 'Layer 2.C.1'))
+        dest = 'Layer 2.C.1'
+        self.assertTrue(self.move_below(src, dest))
         self.compare_tree_maps()
 
         # we expect the settings to be carried along from the
         # original layer collection
-        collection_new = self.parse_move('Layer 2.C.3')
+        collection_new = self.parse_move(dst_old_path)
         self.assertEqual(collection_new.enabled, True)
         self.assertEqual(collection_new.selectable, False)
 

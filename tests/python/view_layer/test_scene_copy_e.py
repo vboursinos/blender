@@ -29,6 +29,8 @@ class UnitTesting(ViewLayerTesting):
         layer = bpy.context.view_layer
 
         original_cube = layer.objects.get('Cube')
+        self.assertIsNotNone(original_cube, "Original 'Cube' object not found in the view layer")
+        
         original_cube.select_set(True)
         self.assertTrue(original_cube.select_get())
 
@@ -36,7 +38,10 @@ class UnitTesting(ViewLayerTesting):
         new_layer = bpy.context.view_layer
 
         self.assertNotEqual(layer, new_layer)
+        
         new_cube = new_layer.objects.get('Cube.001')
+        self.assertIsNotNone(new_cube, "Copied 'Cube.001' object not found in the new view layer")
+        
         self.assertNotEqual(original_cube, new_cube)
         self.assertTrue(new_cube.select_get())
 
