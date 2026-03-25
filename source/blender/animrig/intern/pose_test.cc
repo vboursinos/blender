@@ -111,8 +111,10 @@ TEST_F(PoseTest, get_best_slot)
   Slot &first_slot = pose_action->slot_add();
   Slot &second_slot = pose_action->slot_add_for_id(obj_empty->id);
 
-  EXPECT_EQ(&get_best_pose_slot_for_id(obj_empty->id, *pose_action), &second_slot);
-  EXPECT_EQ(&get_best_pose_slot_for_id(obj_armature_a->id, *pose_action), &first_slot);
+  Slot *best_empty = get_best_pose_slot_for_id(obj_empty->id, *pose_action);
+  Slot *best_a = get_best_pose_slot_for_id(obj_armature_a->id, *pose_action);
+  EXPECT_EQ(best_empty, &second_slot);
+  EXPECT_EQ(best_a, &first_slot);
 }
 
 TEST_F(PoseTest, apply_action_object)
