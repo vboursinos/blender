@@ -298,7 +298,6 @@ const FCurve *fcurve_find_by_rna_path(const AnimData &adt,
                                       const StringRefNull rna_path,
                                       const int array_index)
 {
-  BLI_assert(adt.action);
   if (!adt.action) {
     return nullptr;
   }
