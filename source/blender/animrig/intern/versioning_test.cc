@@ -22,7 +22,7 @@ TEST(animrig_versioning, action_is_layered)
 
   { /* Animato Action only fcurves / Blender version [2.5, 4.4) */
     bAction action = {};
-    Link /* FCurve */ fake_fcurve = {};
+    Link /* FCurve */ fake_fcurve = {nullptr};
 
     BLI_addtail(&action.curves, &fake_fcurve);
     EXPECT_FALSE(action_is_layered(action))
@@ -31,8 +31,8 @@ TEST(animrig_versioning, action_is_layered)
 
   { /* Animato Action with fcurves + groups / Blender version [2.5, 4.4) */
     bAction action = {};
-    Link /* FCurve */ fake_fcurve = {};
-    Link /* bActionGroup */ fake_group = {};
+    Link /* FCurve */ fake_fcurve = {nullptr};
+    Link /* bActionGroup */ fake_group = {nullptr};
 
     BLI_addtail(&action.curves, &fake_fcurve);
     BLI_addtail(&action.groups, &fake_group);
@@ -42,7 +42,7 @@ TEST(animrig_versioning, action_is_layered)
 
   { /* Animato Action with only groups / Blender version [2.5, 4.4) */
     bAction action = {};
-    Link /* bActionGroup */ fake_group = {};
+    Link /* bActionGroup */ fake_group = {nullptr};
 
     BLI_addtail(&action.groups, &fake_group);
     EXPECT_FALSE(action_is_layered(action))
@@ -65,7 +65,7 @@ TEST(animrig_versioning, action_is_layered)
 
   { /* Layered Action as it exists on disk, with forward-compatible info in there. */
     bAction action = {};
-    Link /* FCurve */ fake_fcurve = {};
+    Link /* FCurve */ fake_fcurve = {nullptr};
     action.layer_array_num = 1;
 
     BLI_addtail(&action.curves, &fake_fcurve);
