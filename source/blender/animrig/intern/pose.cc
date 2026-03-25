@@ -24,7 +24,7 @@ namespace {
 using ActionApplier =
     FunctionRef<void(PointerRNA *, bAction *, slot_handle_t, const AnimationEvalContext *)>;
 
-void pose_apply_restore_fcurves(const Span<FCurve *> fcurves)
+void pose_apply_restore_modified_fcurves(const Span<FCurve *> fcurves)
 {
   for (FCurve *fcu : fcurves) {
     fcu->flag &= ~FCURVE_DISABLED;
@@ -77,7 +77,7 @@ void pose_apply(Object *ob,
 
   applier(&pose_owner_ptr, action, slot_handle, anim_eval_context);
 
-  pose_apply_restore_fcurves(modified_fcurves);
+  pose_apply_restore_modified_fcurves(modified_fcurves);
 }
 
 }  // namespace
