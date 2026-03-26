@@ -41,6 +41,10 @@ TEST(bmesh_core, BMVertCreate)
   EXPECT_FALSE(BM_elem_flag_test((BMElem *)bv3, BM_ELEM_SELECT));
   EXPECT_EQ(BM_elem_float_data_get(&bm->vdata, bv3, CD_PROP_FLOAT), 1.5f);
   EXPECT_EQ(BM_mesh_elem_count(bm, BM_VERT), 3);
+  /* additional sanity checks: ensure coordinates copied correctly and selection not copied */
+  EXPECT_EQ(bv3->co[0], 1.0f);
+  EXPECT_EQ(bv3->co[1], 2.0f);
+  EXPECT_EQ(bv3->co[2], 0.0f);
   BM_mesh_free(bm);
 }
 
