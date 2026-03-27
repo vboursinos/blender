@@ -30,7 +30,7 @@ inline bool bone_is_visible(const bArmature *armature, const Bone *bone)
 inline bool bone_is_visible(const bArmature *armature, const bPoseChannel *pchan)
 {
   const bool bone_itself_visible = (pchan->drawflag & PCHAN_DRAW_HIDDEN) == 0;
-  return bone_itself_visible && ANIM_bone_in_visible_collection(armature, pchan->bone);
+  return bone_itself_visible && pchan->bone != nullptr && ANIM_bone_in_visible_collection(armature, pchan->bone);
 }
 
 inline bool bone_is_visible(const bArmature *armature, const EditBone *ebone)
