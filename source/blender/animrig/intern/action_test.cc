@@ -27,6 +27,7 @@
 #include "DEG_depsgraph_build.hh"
 
 #include <limits>
+#include <cstring>
 
 #include "CLG_log.h"
 #include "testing/testing.h"
@@ -1264,7 +1265,7 @@ static void add_keyframe(FCurve &fcu, float x, float y)
   the_keyframe.vec[2][0] = x + 1.0f;
   the_keyframe.vec[2][1] = y;
 
-  memcpy(&fcu.bezt[fcu.totvert], &the_keyframe, sizeof(the_keyframe));
+  std::memcpy(&fcu.bezt[fcu.totvert], &the_keyframe, sizeof(the_keyframe));
   fcu.totvert++;
 }
 

@@ -2576,7 +2576,7 @@ bool fcurve_matches_collection_path(const FCurve &fcurve,
   {
     return false;
   }
-  if (quoted_name != data_name) {
+  if (strcmp(quoted_name, data_name.c_str()) != 0) {
     return false;
   }
 

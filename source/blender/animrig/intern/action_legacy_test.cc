@@ -34,6 +34,7 @@ class ActionLegacyTest : public testing::Test {
   static void TearDownTestSuite()
   {
     CLG_exit();
+    BKE_idtype_uninit();
   }
 
   void SetUp() override
