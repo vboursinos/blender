@@ -27,12 +27,13 @@ void action_deselect_keys(Action &action)
 
 void deselect_keys_actions(Span<bAction *> actions)
 {
-  Set<bAction *> visited_actions;
-  for (bAction *action : actions) {
-    if (!visited_actions.add(action)) {
+  Set<Action *> visited_actions;
+  for (bAction *wrapper : actions) {
+    Action *wrapped = &wrapper->wrap();
+    if (!visited_actions.add(wrapped)) {
       continue;
     }
-    action_deselect_keys(action->wrap());
+    action_deselect_keys(*wrapped);
   }
 }
 
