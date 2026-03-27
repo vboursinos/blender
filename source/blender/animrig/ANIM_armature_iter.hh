@@ -17,6 +17,7 @@
 #include "DNA_armature_types.h"
 
 #include "BLI_listbase_wrapper.hh"
+#include <utility>
 
 namespace blender::animrig {
 /**
@@ -27,11 +28,11 @@ namespace blender::animrig {
  * TODO: extend the callback with a `bool` return value to indicate whether the
  * loop should continue or stop.
  */
-template<typename CB> static void ANIM_armature_foreach_bone(ListBaseT<Bone> *bones, CB callback)
+template<typename CB> static void ANIM_armature_foreach_bone(ListBaseT<Bone> *bones, CB &&callback)
 {
   for (Bone *bone : ListBaseWrapper<Bone>(bones)) {
-    callback(bone);
-    ANIM_armature_foreach_bone(&bone->childbase, callback);
+    std::forward<CB>(callback)(bone);
+    ANIM_armature_foreach_bone(&bone->childbase, std::forward<CB>(callback));
   }
 }
 
@@ -44,11 +45,11 @@ template<typename CB> static void ANIM_armature_foreach_bone(ListBaseT<Bone> *bo
  * loop should continue or stop.
  */
 template<typename CB>
-static void ANIM_armature_foreach_bone(const ListBaseT<Bone> *bones, CB callback)
+static void ANIM_armature_foreach_bone(const ListBaseT<Bone> *bones, CB &&callback)
 {
   for (const Bone *bone : ConstListBaseWrapper<Bone>(bones)) {
-    callback(bone);
-    ANIM_armature_foreach_bone(&bone->childbase, callback);
+    std::forward<CB>(callback)(bone);
+    ANIM_armature_foreach_bone(&bone->childbase, std::forward<CB>(callback));
   }
 }
 
