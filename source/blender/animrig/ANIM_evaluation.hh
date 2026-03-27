@@ -36,7 +36,7 @@ class PropIdentifier {
   StringRefNull rna_path;
   int array_index;
 
-  PropIdentifier() = default;
+  PropIdentifier() : rna_path(), array_index(0) {}
 
   PropIdentifier(const StringRefNull rna_path, const int array_index)
       : rna_path(rna_path), array_index(array_index)
