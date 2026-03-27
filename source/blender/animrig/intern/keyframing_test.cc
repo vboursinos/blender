@@ -139,6 +139,9 @@ class KeyframingTest : public testing::Test {
 
   Channelbag *get_channelbag_in_first_layer(Object &object)
   {
+    if (object.adt == nullptr || object.adt->action == nullptr) {
+      return nullptr;
+    }
     Action &action = object.adt->action->wrap();
     if (action.layer_array_num == 0) {
       return nullptr;
@@ -148,6 +151,9 @@ class KeyframingTest : public testing::Test {
       return nullptr;
     }
     Strip *strip = layer->strip(0);
+    if (strip == nullptr) {
+      return nullptr;
+    }
     BLI_assert(strip->type() == Strip::Type::Keyframe);
     StripKeyframeData &strip_data = strip->data<animrig::StripKeyframeData>(action);
     return strip_data.channelbag_for_slot(object.adt->slot_handle);

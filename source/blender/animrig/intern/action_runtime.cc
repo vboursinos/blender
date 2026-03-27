@@ -31,8 +31,12 @@ void rebuild_slot_user_cache(Main &bmain)
   for (bAction &dna_action : bmain.actions) {
     Action &action = dna_action.wrap();
     for (Slot *slot : action.slots()) {
-      BLI_assert_msg(slot->runtime, "Slot::runtime should always be allocated");
-      slot->runtime->users.clear();
+      if (slot->runtime) {
+        slot->runtime->users.clear();
+      }
+      else {
+        BLI_assert_msg(slot->runtime, "Slot::runtime should always be allocated");
+      }
     }
   }
 
