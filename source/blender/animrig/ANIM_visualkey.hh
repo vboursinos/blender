@@ -8,6 +8,8 @@
  * \brief Functions to work with the visual keying system.
  */
 
+#pragma once
+
 #include "BLI_vector.hh"
 
 namespace blender {
