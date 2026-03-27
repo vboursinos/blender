@@ -50,7 +50,10 @@ class ActionIteratorsTest : public testing::Test {
 
   void TearDown() override
   {
-    BKE_main_free(bmain);
+    if (bmain) {
+      BKE_main_free(bmain);
+      bmain = nullptr;
+    }
   }
 };
 
