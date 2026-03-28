@@ -41,7 +41,6 @@ class UnitTesting(ViewLayerTesting):
         mom_layer_collection = grandma_layer_collection.collections[0]
 
         grandma_layer_collection.enabled = True
-        grandma_layer_collection.enabled = True
         mom_layer_collection.enabled = False
         mom_layer_collection.selectable = True
 
@@ -58,7 +57,7 @@ class UnitTesting(ViewLayerTesting):
         self.assertEqual(len(group.view_layer.collections), 1)
         grandma_group_layer = group.view_layer.collections[0]
 
-        self.assertTrue(grandma_group_layer.enabled, True)
+        self.assertTrue(grandma_group_layer.enabled)
         self.assertTrue(grandma_group_layer.selectable)
 
         self.assertEqual(len(grandma_group_layer.collections), 1)

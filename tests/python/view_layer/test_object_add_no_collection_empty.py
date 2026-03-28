@@ -19,6 +19,8 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(ViewLayerTesting):
+    """Unit tests for view layer: syncing object add to no collection for EMPTY objects."""
+
     def test_syncing_object_add_empty(self):
         """
         See if new objects are added to the correct collection

@@ -19,11 +19,13 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(MoveSceneCollectionSyncTesting):
-    def get_reference_scene_tree_map(self):
+    """Unit tests for move_into behavior of scene collections."""
+
+    def get_reference_scene_tree_map(self) -> dict:
         # original tree, no changes
         return self.get_initial_scene_tree_map()
 
-    def test_scene_collection_into(self):
+    def test_scene_collection_into(self) -> None:
         """
         Test outliner operations
         """

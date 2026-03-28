@@ -27,6 +27,7 @@ class UnitTesting(ViewLayerTesting):
 
         scene = bpy.context.scene
         window = bpy.context.window
+        # Create a simple cube-like mesh object used for visibility tests
         cube = bpy.data.objects.new('guinea pig', bpy.data.meshes.new('mesh'))
 
         layer = scene.view_layers.new('Visibility Test')
@@ -43,7 +44,9 @@ class UnitTesting(ViewLayerTesting):
         layer_collection_kid = layer.collections.link(scene_collection_kid)
 
         layer_collection_mom.enabled = True
+        # Disable the nested Kid collection inside Mom first
         layer_collection_mom.collections[layer_collection_kid.name].enabled = False
+        # Also disable the separate Kid collection that's linked directly to the layer
         layer_collection_kid.enabled = False
 
         layer.update()  # update depsgraph

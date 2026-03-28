@@ -19,6 +19,8 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(ViewLayerTesting):
+    """Tests for view layer visibility evaluation when toggling nested collections in a new view layer."""
+
     def test_visibility(self):
         """
         See if the depsgraph evaluation is correct

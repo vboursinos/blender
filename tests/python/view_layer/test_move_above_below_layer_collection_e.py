@@ -19,6 +19,9 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(MoveLayerCollectionTesting):
+    """
+    Unit tests for move above/below layer collections within the blender view layer outliner.
+    """
     def get_reference_scene_tree_map(self):
         # original tree, no changes
         return self.get_initial_scene_tree_map()

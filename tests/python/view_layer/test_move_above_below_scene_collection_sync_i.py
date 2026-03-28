@@ -23,37 +23,34 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
         # original tree, no changes
         return self.get_initial_scene_tree_map()
 
+    def _do_move_and_compare(self, move_callable):
+        tree = self.setup_tree()
+        self.assertFalse(move_callable(tree))
+        self.compare_tree_maps()
+
     def test_scene_collection_move_a(self):
         """
         Test outliner operations
         """
-        tree = self.setup_tree()
-        self.assertFalse(tree['C'].move_above(tree['2']))
-        self.compare_tree_maps()
+        self._do_move_and_compare(lambda t: t['C'].move_above(t['2']))
 
     def test_scene_collection_move_b(self):
         """
         Test outliner operations
         """
-        tree = self.setup_tree()
-        self.assertFalse(tree['C'].move_below(tree['2']))
-        self.compare_tree_maps()
+        self._do_move_and_compare(lambda t: t['C'].move_below(t['2']))
 
     def test_scene_collection_move_c(self):
         """
         Test outliner operations
         """
-        tree = self.setup_tree()
-        self.assertFalse(tree['C'].move_above(tree['cat']))
-        self.compare_tree_maps()
+        self._do_move_and_compare(lambda t: t['C'].move_above(t['cat']))
 
     def test_scene_collection_move_d(self):
         """
         Test outliner operations
         """
-        tree = self.setup_tree()
-        self.assertFalse(tree['C'].move_below(tree['cat']))
-        self.compare_tree_maps()
+        self._do_move_and_compare(lambda t: t['C'].move_below(t['cat']))
 
 
 # ############################################################

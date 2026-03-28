@@ -2,6 +2,10 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
+"""
+Tests for moving a scene collection into another in render layer synchronization.
+"""
+
 # ############################################################
 # Importing - Same For All Render Layer Tests
 # ############################################################
@@ -12,7 +16,6 @@ from view_layer_common import (
     MoveSceneCollectionSyncTesting,
     setup_extra_arguments,
 )
-
 
 # ############################################################
 # Testing
@@ -41,7 +44,8 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
 
     def test_scene_collection_into(self):
         """
-        Test outliner operations
+        Move the item labeled '3' into the scene collection 'B' and verify the
+        final tree structure matches the reference map.
         """
         tree = self.setup_tree()
         self.assertTrue(tree['3'].move_into(tree['B']))

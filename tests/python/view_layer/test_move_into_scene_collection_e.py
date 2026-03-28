@@ -19,6 +19,10 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(MoveSceneCollectionTesting):
+    """
+    Tests moving a scene collection node into its current parent (no-op)
+    and validates that the tree structure remains as expected.
+    """
     def get_reference_scene_tree_map(self):
         reference_tree_map = [
             ['A', [

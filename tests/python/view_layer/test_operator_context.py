@@ -101,7 +101,7 @@ class UnitTesting(ViewLayerTesting):
         self.assertEqual(bpy.ops.testing.sample(view_layer='Viewport', use_verbose=True), {'FINISHED'})
 
         # expected to fail
-        self.assertTrue(bpy.ops.testing.sample(view_layer=layer.name), {'CANCELLED'})
+        self.assertEqual(bpy.ops.testing.sample(view_layer=layer.name), {'CANCELLED'})
 
         # set view layer and scene collection
         override = bpy.context.copy()

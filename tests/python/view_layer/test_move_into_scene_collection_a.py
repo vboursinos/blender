@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
-
+#
 # ############################################################
 # Importing - Same For All Render Layer Tests
 # ############################################################
@@ -9,8 +9,7 @@
 import unittest
 
 from view_layer_common import (
-    MoveSceneCollectionTesting,
-    setup_extra_arguments,
+    MoveSceneCollectionTesting, setup_extra_arguments
 )
 
 
@@ -19,7 +18,9 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(MoveSceneCollectionTesting):
-    def get_reference_scene_tree_map(self):
+    """Unit tests for moving a scene collection into another within the outliner."""
+
+    def get_reference_scene_tree_map(self) -> list:
         # original tree, no changes
         reference_tree_map = [
             ['A', [
@@ -39,7 +40,7 @@ class UnitTesting(MoveSceneCollectionTesting):
         ]
         return reference_tree_map
 
-    def test_scene_collection_into(self):
+    def test_scene_collection_into(self) -> None:
         """
         Test outliner operations
         """

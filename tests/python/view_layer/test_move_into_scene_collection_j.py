@@ -28,13 +28,13 @@ class UnitTesting(MoveSceneCollectionTesting):
         Test outliner operations
         """
         import bpy
-        master_collection = bpy.context.scene.master_collection
+        scene_collection = bpy.context.scene.collection
 
         tree = self.setup_tree()
 
         for collection in tree.values():
-            # can't move into master_collection anywhere
-            self.assertFalse(master_collection.move_into(collection))
+            # can't move into scene_collection anywhere
+            self.assertFalse(scene_collection.move_into(collection))
 
         self.compare_tree_maps()
 

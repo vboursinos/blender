@@ -20,22 +20,26 @@ from view_layer_common import (
 
 class UnitTesting(MoveSceneCollectionTesting):
     def get_reference_scene_tree_map(self):
+        # Build a readable reference tree describing expected structure.
+        a_children = [
+            ['i', None],
+            ['ii', None],
+            ['iii', None],
+        ]
+        dog_children = [
+            ['A', a_children],
+        ]
+        c_children = [
+            ['1', None],
+            ['2', None],
+            ['3', [
+                ['dog', dog_children],
+                ['cat', None],
+            ]],
+        ]
         reference_tree_map = [
             ['B', None],
-            ['C', [
-                ['1', None],
-                ['2', None],
-                ['3', [
-                    ['dog', [
-                            ['A', [
-                                ['i', None],
-                                ['ii', None],
-                                ['iii', None],
-                            ]],
-                    ]],
-                    ['cat', None],
-                ]],
-            ]],
+            ['C', c_children],
         ]
         return reference_tree_map
 

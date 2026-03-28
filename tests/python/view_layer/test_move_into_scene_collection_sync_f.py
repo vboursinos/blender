@@ -19,7 +19,7 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(MoveSceneCollectionSyncTesting):
-    def get_reference_scene_tree_map(self):
+    def get_reference_scene_tree_map(self) -> list:
         reference_tree_map = [
             ['A', [
                 ['i', None],

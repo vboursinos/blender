@@ -1,3 +1,4 @@
+
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -21,11 +22,11 @@ from view_layer_common import (
 class UnitTesting(ViewLayerTesting):
     def test_object_link_context(self):
         """
-        See if we can link objects via bpy.context.scene_collection
+        See if we can link objects via bpy.context.scene.collection
         """
         import bpy
         bpy.context.window.view_layer = bpy.context.scene.view_layers['Viewport']
-        master_collection = bpy.context.scene_collection
+        master_collection = bpy.context.scene.collection
         self.do_object_link(master_collection)
 
 

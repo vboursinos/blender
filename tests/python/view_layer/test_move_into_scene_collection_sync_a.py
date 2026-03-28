@@ -1,3 +1,10 @@
+"""
+Unit tests for MoveSceneCollectionSync - test_move_into_scene_collection_sync_a.py
+
+This test ensures that moving a scene collection into another scene collection
+behaves as expected within the outliner synchronization tests.
+"""
+
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later

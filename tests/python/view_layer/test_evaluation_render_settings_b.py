@@ -23,7 +23,7 @@ class UnitTesting(ViewLayerTesting):
     @unittest.skip("Uses the clay engine, that is removed #55454")
     def test_render_settings(self):
         """
-        See if the depsgraph evaluation is correct
+        See if the depsgraph evaluation is correct.
         """
         clay = Clay()
         self.assertEqual(clay.get('object', 'matcap_icon'), '01')

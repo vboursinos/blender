@@ -1,3 +1,7 @@
+**IMPORTANT**: make sure the header title matches exactly
+
+## ^^artemis_code^^
+
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -12,6 +16,8 @@ from view_layer_common import (
     ViewLayerTesting,
     setup_extra_arguments,
 )
+
+import bpy  # Added module-level import to streamline bpy usage across tests
 
 
 # ############################################################
