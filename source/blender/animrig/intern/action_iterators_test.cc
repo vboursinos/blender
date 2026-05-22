@@ -86,6 +86,7 @@ TEST_F(ActionIteratorsTest, iterate_all_fcurves_of_slot)
 
   /* Get all FCurves. */
   Vector<const FCurve *> cube_fcurves;
+  cube_fcurves.reserve(3);
   foreach_fcurve_in_action_slot(
       *action, cube_slot.handle, [&](const FCurve &fcurve) { cube_fcurves.append(&fcurve); });
 
@@ -96,6 +97,7 @@ TEST_F(ActionIteratorsTest, iterate_all_fcurves_of_slot)
 
   /* Get only FCurves with index 0 which should be 1. */
   Vector<const FCurve *> monkey_fcurves;
+  monkey_fcurves.reserve(1);
   foreach_fcurve_in_action_slot(*action, monkey_slot.handle, [&](const FCurve &fcurve) {
     if (fcurve.array_index == 0) {
       monkey_fcurves.append(&fcurve);
@@ -192,5 +194,3 @@ TEST_F(ActionIteratorsTest, foreach_action_slot_use_with_rna)
       << "Expected Slot " << another_slot.identifier << " but found "
       << action_and_slot->second->identifier;
 }
-
-}  // namespace blender::animrig::tests
