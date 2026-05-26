@@ -113,9 +113,8 @@ class EvaluationResult {
              const float value,
              const PathResolvedRNA &prop_rna)
   {
-    PropIdentifier key(rna_path, array_index);
-    AnimatedProperty anim_prop(value, prop_rna);
-    result_.add_overwrite(key, anim_prop);
+    result_.add_overwrite(PropIdentifier(rna_path, array_index),
+                          AnimatedProperty(value, prop_rna));
   }
 
   AnimatedProperty value(const StringRefNull rna_path, const int array_index) const
