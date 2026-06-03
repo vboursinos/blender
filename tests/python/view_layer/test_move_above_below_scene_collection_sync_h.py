@@ -23,6 +23,25 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
         # original tree, no changes
         return self.get_initial_scene_tree_map()
 
+    def _assert_no_move_from_master(self, tree, method_name):
+        """
+        Helper: ensure master_collection cannot move a child relative to it.
+        """
+        import bpy
+        master_collection = bpy.context.scene.master_collection
+        move = getattr(master_collection, method_name)
+        for collection in tree.values():
+            self.assertFalse(move(collection))
+
+    def _assert_no_move_to_master(self, tree, method_name):
+        """
+        Helper: ensure a child cannot move relative to the master_collection.
+        """
+        import bpy
+        master_collection = bpy.context.scene.master_collection
+        for collection in tree.values():
+            self.assertFalse(getattr(collection, method_name)(master_collection))
+
     def test_scene_collection_move_a(self):
         """
         Test outliner operations
@@ -31,9 +50,7 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
         master_collection = bpy.context.scene.master_collection
 
         tree = self.setup_tree()
-        for collection in tree.values():
-            # can't move into master_collection anywhere
-            self.assertFalse(master_collection.move_above(collection))
+        self._assert_no_move_from_master(tree, 'move_above')
 
         self.compare_tree_maps()
 
@@ -45,9 +62,7 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
         master_collection = bpy.context.scene.master_collection
 
         tree = self.setup_tree()
-        for collection in tree.values():
-            # can't move into master_collection anywhere
-            self.assertFalse(master_collection.move_below(collection))
+        self._assert_no_move_from_master(tree, 'move_below')
 
         self.compare_tree_maps()
 
@@ -59,9 +74,7 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
         master_collection = bpy.context.scene.master_collection
 
         tree = self.setup_tree()
-        for collection in tree.values():
-            # can't move into master_collection anywhere
-            self.assertFalse(collection.move_above(master_collection))
+        self._assert_no_move_to_master(tree, 'move_above')
 
         self.compare_tree_maps()
 
@@ -73,9 +86,7 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
         master_collection = bpy.context.scene.master_collection
 
         tree = self.setup_tree()
-        for collection in tree.values():
-            # can't move into master_collection anywhere
-            self.assertFalse(collection.move_below(master_collection))
+        self._assert_no_move_to_master(tree, 'move_below')
 
         self.compare_tree_maps()
 

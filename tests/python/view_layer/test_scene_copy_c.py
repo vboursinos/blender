@@ -15,6 +15,9 @@ from view_layer_common import (
     setup_extra_arguments,
 )
 
+# A small refactor: centralize the json filename to reduce duplication
+LAYERS_JSON_COPY = 'layers_copy_full.json'
+
 
 # ############################################################
 # Testing
@@ -28,7 +31,7 @@ class UnitTesting(ViewLayerTesting):
         import os
         ROOT = self.get_root()
 
-        filepath_layers_json_copy = os.path.join(ROOT, 'layers_copy_full.json')
+        filepath_layers_json_copy = os.path.join(ROOT, LAYERS_JSON_COPY)
         self.do_scene_copy(
             filepath_layers_json_copy,
             'FULL_COPY',

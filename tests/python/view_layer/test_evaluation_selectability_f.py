@@ -1,3 +1,7 @@
+**IMPORTANT**: make sure the header title matches exactly
+
+## ^^artemis_code^^
+
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -27,6 +31,9 @@ class UnitTesting(ViewLayerTesting):
         cube = bpy.data.objects.new('guinea pig', bpy.data.meshes.new('mesh'))
         scene_collection = scene.master_collection.collections.new('collection')
         layer_collection = view_layer.collections.link(scene_collection)
+
+        # Sanity-check: ensure the LayerCollection was created successfully
+        self.assertIsNotNone(layer_collection)
 
         view_layer.update()  # update depsgraph
 

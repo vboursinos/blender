@@ -6,6 +6,8 @@
 # Importing - Same For All Render Layer Tests
 # ############################################################
 
+import os
+import tempfile
 import unittest
 
 from view_layer_common import (
@@ -29,11 +31,10 @@ class UnitTesting(ViewLayerTesting):
         See if write/read is working for scene collections and layers
         """
         import bpy
-        import os
-        import tempfile
 
         with tempfile.TemporaryDirectory() as dirpath:
-            (self.path_exists(f) for f in (filepath_layers, filepath_layers_json))
+            for f in (filepath_layers, filepath_layers_json):
+                self.assertTrue(os.path.exists(f), f"File not found: {f}")
 
             filepath_doversion = os.path.join(dirpath, 'doversion.blend')
             filepath_saved = os.path.join(dirpath, 'doversion_saved.blend')
@@ -81,8 +82,6 @@ class UnitTesting(ViewLayerTesting):
         """
         See if the doversion and writing are working for scene collections
         """
-        import os
-
         ROOT = self.get_root()
         filepath_layers = os.path.join(ROOT, 'layers.blend')
         filepath_layers_json = os.path.join(ROOT, 'layers_simple.json')
@@ -97,8 +96,6 @@ class UnitTesting(ViewLayerTesting):
         """
         See if the doversion and writing are working for collections and layers
         """
-        import os
-
         ROOT = self.get_root()
         filepath_layers = os.path.join(ROOT, 'layers.blend')
         filepath_layers_json = os.path.join(ROOT, 'layers.json')
@@ -112,10 +109,8 @@ class UnitTesting(ViewLayerTesting):
     def test_scene_read_collections(self):
         """
         See if read is working for scene collections
-        (run ``test_scene_write_colections`` first).
+        (run ``test_scene_write_collections`` first).
         """
-        import os
-
         ROOT = self.get_root()
         filepath_layers = os.path.join(ROOT, 'layers.blend')
         filepath_layers_json = os.path.join(ROOT, 'layers_simple.json')
@@ -131,8 +126,6 @@ class UnitTesting(ViewLayerTesting):
         See if read is working for scene layers
         (run ``test_scene_write_layers`` first).
         """
-        import os
-
         ROOT = self.get_root()
         filepath_layers = os.path.join(ROOT, 'layers.blend')
         filepath_layers_json = os.path.join(ROOT, 'layers.json')

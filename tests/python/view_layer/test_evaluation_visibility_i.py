@@ -19,10 +19,12 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(ViewLayerTesting):
+    """Renderer View Layer Testing: visibility evaluation tests."""
     def test_visibility_torus(self):
         """
         See if the depsgraph evaluation is correct
         """
+        # Ensure that the torus object is added to the scene and visible to the depsgraph
         self.do_visibility_object_add('TORUS')
 
 

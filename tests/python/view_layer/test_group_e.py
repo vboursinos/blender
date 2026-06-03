@@ -29,28 +29,31 @@ class UnitTesting(ViewLayerTesting):
         ob = bpy.context.object
 
         # clean up the scene a bit
-        for o in (o for o in view_layer.objects if o != ob):
-            view_layer.collections[0].collection.objects.unlink(o)
+        for o in list(view_layer.objects):
+            if o != ob:
+                for col in o.users_collection:
+                    col.objects.unlink(o)
 
-        for v in (v for v in scene.view_layers if v != view_layer):
-            scene.view_layers.remove(v)
+        for v in list(scene.view_layers):
+            if v != view_layer:
+                scene.view_layers.remove(v)
 
         # update depsgraph
         view_layer.update()
 
         # create group
-        group = bpy.data.groups.new("Switch")
-        group.objects.link(ob)
+        collection = bpy.data.collections.new("Switch")
+        collection.objects.link(ob)
 
         # update depsgraph
         view_layer.update()
 
         # instance the group
         empty = bpy.data.objects.new("Empty", None)
-        bpy.context.scene_collection.objects.link(empty)
+        scene.collection.objects.link(empty)
         _layer_collection = bpy.context.layer_collection
-        empty.instance_type = 'GROUP'
-        empty.instance_collection = group
+        empty.instance_type = 'COLLECTION'
+        empty.instance_collection = collection
 
         # prepare to delete the original object
         # we could just pass an overridden context

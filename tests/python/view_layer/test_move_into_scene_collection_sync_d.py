@@ -25,7 +25,7 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
 
     def test_scene_collection_into(self):
         """
-        Test outliner operations
+        Ensure that attempting to move a scene collection into its own last item is rejected.
         """
         tree = self.setup_tree()
         # can't move into a collection if already the last item of the collection

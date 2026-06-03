@@ -6,6 +6,8 @@
 # Importing - Same For All Render Layer Tests
 # ############################################################
 
+import os
+import tempfile
 import unittest
 
 from view_layer_common import (
@@ -26,8 +28,6 @@ from view_layer_common import (
 class UnitTesting(ViewLayerTesting):
     def do_layer_linking(self, filepath_json, link_mode):
         import bpy
-        import os
-        import tempfile
 
         ROOT = self.get_root()
         with tempfile.TemporaryDirectory() as dirpath:
@@ -69,21 +69,19 @@ class UnitTesting(ViewLayerTesting):
             self.assertTrue(datas, "Data is not valid")
 
             filepath_nested_json = os.path.join(dirpath, "nested.json")
-            with open(filepath_nested_json, "w") as f:
+            with open(filepath_nested_json, "w", encoding="utf-8") as f:
                 for data in datas:
                     f.write(dump(data))
 
-            self.assertTrue(compare_files(
-                filepath_nested_json,
-                filepath_json,
-            ),
-                "Scene dump files differ")
+            self.assertTrue(
+                compare_files(filepath_nested_json, filepath_json),
+                "Scene dump files differ",
+            )
 
     def test_syncing_layer_new(self):
         """
         See if the creation of new layers is going well
         """
-        import os
         ROOT = self.get_root()
         filepath_json = os.path.join(ROOT, 'layers_new_layer.json')
         self.do_layer_linking(filepath_json, 'LAYER_NEW')
@@ -93,7 +91,6 @@ class UnitTesting(ViewLayerTesting):
         See if the creation of new layers is going well
         And linking a new scene collection in the layer works
         """
-        import os
         ROOT = self.get_root()
         filepath_json = os.path.join(ROOT, 'layers_layer_collection_link.json')
         self.do_layer_linking(filepath_json, 'COLLECTION_LINK')
@@ -103,7 +100,6 @@ class UnitTesting(ViewLayerTesting):
         See if the creation of new layers is going well
         And unlinking the origin scene collection works
         """
-        import os
         ROOT = self.get_root()
         filepath_json = os.path.join(ROOT, 'layers_layer_collection_unlink.json')
         self.do_layer_linking(filepath_json, 'COLLECTION_UNLINK')

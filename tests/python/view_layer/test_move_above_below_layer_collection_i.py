@@ -24,7 +24,7 @@ class UnitTesting(MoveLayerCollectionTesting):
         return self.get_initial_scene_tree_map()
 
     def get_reference_layers_tree_map(self):
-        reference_layers_map = [
+        return [
             ['Layer 1', [
                 'Master Collection',
                 'C',
@@ -37,7 +37,6 @@ class UnitTesting(MoveLayerCollectionTesting):
                 'cat',
             ]],
         ]
-        return reference_layers_map
 
     def test_layer_collection_move_a(self):
         """
@@ -65,8 +64,8 @@ class UnitTesting(MoveLayerCollectionTesting):
         # we expect the settings to be carried along from the
         # original layer collection
         collection_new = self.parse_move('Layer 2.C')
-        self.assertEqual(collection_new.enabled, True)
-        self.assertEqual(collection_new.selectable, False)
+        self.assertTrue(collection_new.enabled)
+        self.assertFalse(collection_new.selectable)
 
 
 # ############################################################

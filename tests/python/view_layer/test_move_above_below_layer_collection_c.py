@@ -27,13 +27,16 @@ class UnitTesting(MoveLayerCollectionTesting):
         # original tree, no changes
         return self.get_initial_layers_tree_map()
 
+    def _assert_move_below_not_allowed(self, src, dst):
+        self.setup_tree()
+        self.assertFalse(self.move_below(src, dst))
+        self.compare_tree_maps()
+
     def test_layer_collection_move_a(self):
         """
         Test outliner operations
         """
-        self.setup_tree()
-        self.assertFalse(self.move_below('Layer 1.3.cat', 'Layer 1.3.dog'))
-        self.compare_tree_maps()
+        self._assert_move_below_not_allowed('Layer 1.3.cat', 'Layer 1.3.dog')
 
     def test_layer_collection_move_b(self):
         """

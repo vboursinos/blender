@@ -43,7 +43,9 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
         Test outliner operations
         """
         tree = self.setup_tree()
-        self.assertTrue(tree['A'].move_above(tree['dog']))
+        # Move node 'A' above its sibling 'dog' and verify the move
+        moved = tree['A'].move_above(tree['dog'])
+        self.assertTrue(moved)
         self.compare_tree_maps()
 
 

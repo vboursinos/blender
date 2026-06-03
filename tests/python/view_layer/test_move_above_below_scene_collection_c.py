@@ -19,6 +19,11 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(MoveSceneCollectionTesting):
+    """Unit tests for moving scene collection items above/below in the view layer.
+
+    This test ensures that moving item '3' below 'ii' within
+    parent 'A' results in the expected scene collection tree structure.
+    """
     def get_reference_scene_tree_map(self):
         reference_tree_map = [
             ['A', [

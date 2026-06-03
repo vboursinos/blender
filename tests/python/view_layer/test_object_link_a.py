@@ -24,8 +24,8 @@ class UnitTesting(ViewLayerTesting):
         See if we can link objects
         """
         import bpy
-        master_collection = bpy.context.scene.master_collection
-        self.do_object_link(master_collection)
+        collection = bpy.context.scene.collection
+        self.do_object_link(collection)
 
 
 # ############################################################

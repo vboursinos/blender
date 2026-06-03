@@ -20,6 +20,7 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(ViewLayerTesting):
+    """Unit tests for view layer evaluation render settings (Clay engine)."""
     @unittest.skip("Uses the clay engine, that is removed #55454")
     def test_render_settings(self):
         """

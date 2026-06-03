@@ -7,6 +7,7 @@
 # ############################################################
 
 import unittest
+import bpy
 
 from view_layer_common import (
     ViewLayerTesting,
@@ -23,8 +24,6 @@ class UnitTesting(ViewLayerTesting):
         """
         See if the depsgraph evaluation is correct
         """
-        import bpy
-
         scene = bpy.context.scene
         window = bpy.context.window
         cube = bpy.data.objects.new('guinea pig', bpy.data.meshes.new('mesh'))
@@ -39,7 +38,7 @@ class UnitTesting(ViewLayerTesting):
         scene_collection_kid.objects.link(cube)
 
         layer_collection_mom = layer.collections.link(scene_collection_mom)
-        _layer_collection_kid = layer.collections.link(scene_collection_kid)
+        layer.collections.link(scene_collection_kid)
 
         layer_collection_mom.enabled = True
         layer.update()  # update depsgraph

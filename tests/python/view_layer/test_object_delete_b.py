@@ -21,8 +21,8 @@ from view_layer_common import (
 class UnitTesting(ViewLayerTesting):
     def test_object_delete_operator(self):
         """
-        See if new objects are added to the correct collection
-        bpy.ops.object.del()
+        Delete an object using the operator bpy.ops.object.delete and verify
+        deletion behavior.
         """
         self.do_object_delete('OPERATOR')
 

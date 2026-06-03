@@ -1,3 +1,5 @@
+## ^^artemis_code^^
+
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -40,9 +42,11 @@ class UnitTesting(ViewLayerTesting):
         collection = master_collection.collections[0]
         collection_nested = collection.collections.new()
 
-        for ob in collection.objects:
+        # Link all objects from the current collection to the new nested collection.
+        for ob in list(collection.objects):
             collection_nested.objects.link(ob)
 
+        # Remove objects from the original collection so only the nested collection holds them.
         while collection.objects:
             collection.objects.unlink(collection.objects[0])
 

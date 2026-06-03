@@ -8,6 +8,8 @@
 
 import unittest
 
+import bpy
+
 from view_layer_common import (
     MoveSceneCollectionSyncTesting,
     setup_extra_arguments,
@@ -27,7 +29,6 @@ class UnitTesting(MoveSceneCollectionSyncTesting):
         """
         Test outliner operations
         """
-        import bpy
         master_collection = bpy.context.scene.master_collection
 
         tree = self.setup_tree()

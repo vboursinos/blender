@@ -6,6 +6,20 @@
 # Importing - Same For All Render Layer Tests
 # ############################################################
 
+"""
+Test suite for collection rename and creation with equal names across different
+levels of the hierarchy in Blender's view layer collections.
+
+The tests cover:
+- Renaming a collection to the name of another, ensuring allowed behavior for
+  non-sibling relationships.
+- Renaming siblings to the same name is disallowed (or results in a unique
+  name on the same parent) as per Blender's collection naming rules.
+- Creating new collections with a name that already exists under the same parent
+  results in a unique name (suffixes added by Blender) while allowing the same
+  name under different parents.
+"""
+
 import unittest
 
 from view_layer_common import (

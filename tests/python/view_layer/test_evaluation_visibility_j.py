@@ -26,14 +26,14 @@ class UnitTesting(ViewLayerTesting):
         import bpy
 
         # delete all initial objects
-        while bpy.data.objects:
-            bpy.data.objects.remove(bpy.data.objects[0])
+        for obj in list(bpy.data.objects):
+            bpy.data.objects.remove(obj)
 
         # delete all initial collections
         scene = bpy.context.scene
         master_collection = scene.master_collection
-        while master_collection.collections:
-            master_collection.collections.remove(master_collection.collections[0])
+        for col in list(master_collection.collections):
+            master_collection.collections.remove(col)
 
         collection_parent = master_collection.collections.new('parent')
         collection_nested = collection_parent.collections.new('child linked')

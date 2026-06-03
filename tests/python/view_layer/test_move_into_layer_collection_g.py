@@ -19,11 +19,11 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(MoveLayerCollectionTesting):
-    def get_reference_scene_tree_map(self):
+    def get_reference_scene_tree_map(self) -> list:
         # original tree, no changes
         return self.get_initial_scene_tree_map()
 
-    def get_reference_layers_tree_map(self):
+    def get_reference_layers_tree_map(self) -> list:
         reference_layers_map = [
             ['Layer 1', [
                 'Master Collection',

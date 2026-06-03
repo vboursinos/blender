@@ -1,7 +1,11 @@
+**IMPORTANT**: make sure the header title matches exactly
+
+## ^^artemis_code^^
+
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
-
+#
 # ############################################################
 # Importing - Same For All Render Layer Tests
 # ############################################################
@@ -21,8 +25,8 @@ from view_layer_common import (
 class UnitTesting(ViewLayerTesting):
     def test_object_delete_data(self):
         """
-        See if objects are removed correctly from all related collections
-        bpy.data.objects.remove()
+        Verify that deleting an object via bpy.data.objects.remove() properly
+        updates all related collections to ensure consistency.
         """
         self.do_object_delete('DATA')
 

@@ -27,10 +27,13 @@ class UnitTesting(ViewLayerTesting):
 
         scene = bpy.context.scene
         window = bpy.context.window
-        cube = bpy.data.objects.new('guinea pig', bpy.data.meshes.new('mesh'))
+        # Create a simple cube object (name adjusted to remove spaces in the identifier)
+        cube = bpy.data.objects.new('guinea_pig', bpy.data.meshes.new('mesh'))
 
         layer = scene.view_layers.new('Selectability Test')
-        layer.collections.unlink(layer.collections[0])
+        # Unlink the default collection from the new view layer to start clean
+        first_collection = layer.collections[0]
+        layer.collections.unlink(first_collection)
         window.view_layer = layer
 
         scene_collection_mom = scene.master_collection.collections.new("Mom")

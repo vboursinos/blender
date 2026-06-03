@@ -1,7 +1,9 @@
+## ^^artemis_code^^
+
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
-
+#
 # ############################################################
 # Importing - Same For All Render Layer Tests
 # ############################################################
@@ -19,7 +21,7 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(MoveSceneCollectionTesting):
-    def get_reference_scene_tree_map(self):
+    def get_reference_scene_tree_map(self) -> list:
         reference_tree_map = [
             ['A', [
                 ['i', None],
@@ -39,9 +41,9 @@ class UnitTesting(MoveSceneCollectionTesting):
         ]
         return reference_tree_map
 
-    def test_scene_collection_into(self):
+    def test_scene_collection_into(self) -> None:
         """
-        Test outliner operations
+        Test outliner operations: move 'cat' into 'dog' within the scene collection.
         """
         tree = self.setup_tree()
         self.assertTrue(tree['cat'].move_into(tree['dog']))

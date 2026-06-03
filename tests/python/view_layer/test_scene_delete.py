@@ -26,8 +26,13 @@ class UnitTesting(ViewLayerTesting):
         import bpy
 
         scene = bpy.context.scene
-        bpy.data.scenes.new('New')
+        scene_name = scene.name
+        
+        new_scene = bpy.data.scenes.new('New')
         bpy.data.scenes.remove(scene)
+        
+        self.assertNotIn(scene_name, bpy.data.scenes)
+        self.assertIn(new_scene.name, bpy.data.scenes)
 
 
 # ############################################################

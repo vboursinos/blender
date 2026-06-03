@@ -42,6 +42,8 @@ class UnitTesting(ViewLayerTesting):
             three_c = bpy.data.objects.get('T.3c')
             three_d = bpy.data.objects.get('T.3d')
 
+            assert three_b is not None and three_c is not None and three_d is not None, "Required test objects not found in layers.blend"
+
             scene = bpy.context.scene
 
             subzero = scene.master_collection.collections['1'].collections.new('sub-zero')

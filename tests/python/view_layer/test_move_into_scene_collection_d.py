@@ -1,3 +1,5 @@
+## ^^artemis_code^^
+
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -25,7 +27,9 @@ class UnitTesting(MoveSceneCollectionTesting):
 
     def test_scene_collection_into(self):
         """
-        Test outliner operations
+        Ensure moving a collection into the last item of the same collection is not allowed.
+        This tests that an item cannot be moved into its own last member and that
+        the tree structure remains unchanged.
         """
         tree = self.setup_tree()
         # can't move into a collection if already the last item of the collection

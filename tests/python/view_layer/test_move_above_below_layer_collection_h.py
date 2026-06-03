@@ -58,8 +58,8 @@ class UnitTesting(MoveLayerCollectionTesting):
         # we expect the settings to be carried along from the
         # original layer collection
         collection_new = self.parse_move('Layer 2.3.cat')
-        self.assertEqual(collection_new.enabled, True)
-        self.assertEqual(collection_new.selectable, False)
+        self.assertTrue(collection_new.enabled)
+        self.assertFalse(collection_new.selectable)
 
 
 # ############################################################

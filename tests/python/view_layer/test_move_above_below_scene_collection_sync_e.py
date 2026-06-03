@@ -19,7 +19,8 @@ from view_layer_common import (
 # ############################################################
 
 class UnitTesting(MoveSceneCollectionSyncTesting):
-    def get_reference_scene_tree_map(self):
+    """Unit tests for moving scene collections above/below within synced render layer trees."""
+    def get_reference_scene_tree_map(self) -> list:
         # original tree, no changes
         reference_tree_map = [
             ['A', [

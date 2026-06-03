@@ -13,6 +13,11 @@ from view_layer_common import (
     setup_extra_arguments,
 )
 
+# NOTE:
+# This test suite uses the MoveSceneCollectionSyncTesting harness to verify
+# that moving a node into a scene collection results in the expected
+# hierarchical structure. The reference_tree_map method describes the
+# expected tree after the operation.
 
 # ############################################################
 # Testing

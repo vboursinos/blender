@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2017-2022 Blender Authors
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
-
+#
 # ############################################################
 # Importing - Same For All Render Layer Tests
 # ############################################################
@@ -45,7 +45,8 @@ class UnitTesting(ViewLayerTesting):
         bpy.context.view_layer.update()  # update depsgraph
 
         cube.select_set(True)
-        layer_collection_mom.collections[layer_collection_kid.name].selectable = False
+        layer_kid_collection_name = layer_collection_kid.name
+        layer_collection_mom.collections[layer_kid_collection_name].selectable = False
 
         bpy.context.view_layer.update()  # update depsgraph
         self.assertTrue(cube.visible_get(), "Cube should be visible")

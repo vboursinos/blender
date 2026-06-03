@@ -21,7 +21,7 @@ from view_layer_common import (
 class UnitTesting(ViewLayerTesting):
     def test_visibility_empty(self):
         """
-        See if the depsgraph evaluation is correct
+        Verify that the depsgraph evaluation handles an added EMPTY object correctly.
         """
         self.do_visibility_object_add('EMPTY')
 

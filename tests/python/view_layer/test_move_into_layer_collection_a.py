@@ -21,7 +21,7 @@ from view_layer_common import (
 class UnitTesting(MoveLayerCollectionTesting):
     def get_reference_scene_tree_map(self):
         # original tree, no changes
-        reference_tree_map = [
+        return [
             ['A', [
                 ['i', None],
                 ['ii', None],
@@ -37,11 +37,10 @@ class UnitTesting(MoveLayerCollectionTesting):
                 ]],
             ]],
         ]
-        return reference_tree_map
 
     def get_reference_layers_tree_map(self):
         # original tree, no changes
-        reference_layers_map = [
+        return [
             ['Layer 1', [
                 'Master Collection',
                 'C',
@@ -54,7 +53,6 @@ class UnitTesting(MoveLayerCollectionTesting):
                 'cat',
             ]],
         ]
-        return reference_layers_map
 
     def test_layer_collection_into(self):
         """

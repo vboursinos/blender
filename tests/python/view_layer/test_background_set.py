@@ -32,7 +32,7 @@ class UnitTesting(ViewLayerTesting):
         # Update depsgraph.
         bpy.context.view_layer.update()
 
-        # Safety check, there should be no objects in thew newly created scene.
+        # Safety check, there should be no objects in the newly created scene.
         self.assertEqual(0, len(bpy.context.depsgraph.objects))
 
         # Now set the background set, and objects relationship.
@@ -46,7 +46,7 @@ class UnitTesting(ViewLayerTesting):
         self.assertEqual(3, len(bpy.context.depsgraph.objects))
 
         # We now check if the objects are properly flagged as from set
-        # These objects can't be possible nor show their origins or
+        # These objects can't be selectable nor show their origins or
         # relationship lines
         for ob in bpy.context.depsgraph.objects:
             self.assertTrue(ob.is_from_set)
