@@ -442,8 +442,7 @@ void bmo_extrude_face_region_exec(BMesh *bm, BMOperator *op)
     }
   }
 
-  BMVert **dissolve_verts = nullptr;
-  int dissolve_verts_len = 0;
+  Vector<BMVert *> dissolve_verts;
   float average_normal[3];
   if (use_dissolve_ortho_edges) {
     /* Calc average normal. */
@@ -455,11 +454,8 @@ void bmo_extrude_face_region_exec(BMesh *bm, BMOperator *op)
       average_normal[2] = 1.0f;
     }
 
-    /* Allocate array to store possible vertices that will be dissolved. */
-    int boundary_edges_len = BMO_slot_map_len(dupeop.slots_out, "boundary_map.out");
-    /* We do not know the real number of boundary vertices. */
-    int boundary_verts_len_maybe = 2 * boundary_edges_len;
-    dissolve_verts = MEM_new_array_uninitialized<BMVert *>(boundary_verts_len_maybe, __func__);
+    /* Reserve space to avoid reallocations. */
+    dissolve_verts.reserve(2 * BMO_slot_map_len(dupeop.slots_out, "boundary_map.out"));
   }
 
   BMO_slot_copy(&dupeop, slots_out, "geom.out", op, slots_out, "geom.out");
@@ -578,11 +574,11 @@ void bmo_extrude_face_region_exec(BMesh *bm, BMOperator *op)
       BMVert *v2 = e->v2;
       if (!BMO_elem_flag_test(bm, v1, EXT_TAG)) {
         BMO_elem_flag_enable(bm, v1, EXT_TAG);
-        dissolve_verts[dissolve_verts_len++] = v1;
+        dissolve_verts.append(v1);
       }
       if (!BMO_elem_flag_test(bm, v2, EXT_TAG)) {
         BMO_elem_flag_enable(bm, v2, EXT_TAG);
-        dissolve_verts[dissolve_verts_len++] = v2;
+        dissolve_verts.append(v2);
       }
       /* Tag the edges that can collapse. */
       BMO_elem_flag_enable(bm, f_edges[0], EXT_TAG);
@@ -607,21 +603,16 @@ void bmo_extrude_face_region_exec(BMesh *bm, BMOperator *op)
     BM_edge_create(bm, v, v2, nullptr, BM_CREATE_NO_DOUBLE);
   }
 
-  if (dissolve_verts) {
-    BMVert **v_iter = &dissolve_verts[0];
-    for (int i = dissolve_verts_len; i--; v_iter++) {
-      v = *v_iter;
-      e = v->e;
-      BMEdge *e_other = BM_DISK_EDGE_NEXT(e, v);
-      if ((e_other == e) || (BM_DISK_EDGE_NEXT(e_other, v) == e)) {
-        /* Loose edge or BMVert is edge pair. */
-        BM_edge_collapse(bm, BMO_elem_flag_test(bm, e, EXT_TAG) ? e : e_other, v, true, true);
-      }
-      else {
-        BLI_assert(!BM_vert_is_edge_pair(v));
-      }
+  for (BMVert *v_dissolve : dissolve_verts) {
+    e = v_dissolve->e;
+    BMEdge *e_other = BM_DISK_EDGE_NEXT(e, v_dissolve);
+    if ((e_other == e) || (BM_DISK_EDGE_NEXT(e_other, v_dissolve) == e)) {
+      /* Loose edge or BMVert is edge pair. */
+      BM_edge_collapse(bm, BMO_elem_flag_test(bm, e, EXT_TAG) ? e : e_other, v_dissolve, true, true);
     }
-    MEM_delete(dissolve_verts);
+    else {
+      BLI_assert(!BM_vert_is_edge_pair(v_dissolve));
+    }
   }
 
   /* cleanup */
