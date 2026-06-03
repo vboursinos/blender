@@ -68,34 +68,34 @@ static void delete_void_pointer(void *data)
 
 static void delete_laplacian_system(LaplacianSystem *sys)
 {
-  delete_void_pointer(sys->eweights);
-  delete_void_pointer(sys->fweights);
-  delete_void_pointer(sys->ring_areas);
-  delete_void_pointer(sys->vlengths);
-  delete_void_pointer(sys->vweights);
-  delete_void_pointer(sys->zerola);
+  if (!sys) {
+    return;
+  }
+  MEM_SAFE_FREE(sys->eweights);
+  MEM_SAFE_FREE(sys->fweights);
+  MEM_SAFE_FREE(sys->ring_areas);
+  MEM_SAFE_FREE(sys->vlengths);
+  MEM_SAFE_FREE(sys->vweights);
+  MEM_SAFE_FREE(sys->zerola);
   if (sys->context) {
     EIG_linear_solver_delete(sys->context);
   }
-  sys->bm = nullptr;
-  sys->op = nullptr;
   MEM_delete(sys);
 }
 
-static void memset_laplacian_system(LaplacianSystem *sys, int val)
+static void init_laplacian_system_buffers(LaplacianSystem *sys)
 {
-  memset(sys->eweights, val, sizeof(float) * sys->numEdges);
-  memset(sys->fweights, val, sizeof(float[3]) * sys->numLoops);
-  memset(sys->ring_areas, val, sizeof(float) * sys->numVerts);
-  memset(sys->vlengths, val, sizeof(float) * sys->numVerts);
-  memset(sys->vweights, val, sizeof(float) * sys->numVerts);
-  memset(sys->zerola, val, sizeof(bool) * sys->numVerts);
+  std::fill(sys->eweights, sys->eweights + sys->numEdges, 0.0f);
+  std::fill(reinterpret_cast<float *>(sys->fweights), reinterpret_cast<float *>(sys->fweights) + (sys->numLoops * 3), 0.0f);
+  std::fill(sys->ring_areas, sys->ring_areas + sys->numVerts, 0.0f);
+  std::fill(sys->vlengths, sys->vlengths + sys->numVerts, 0.0f);
+  std::fill(sys->vweights, sys->vweights + sys->numVerts, 0.0f);
+  std::fill(sys->zerola, sys->zerola + sys->numVerts, false);
 }
 
 static LaplacianSystem *init_laplacian_system(int a_numEdges, int a_numLoops, int a_numVerts)
 {
-  LaplacianSystem *sys;
-  sys = MEM_new_zeroed<LaplacianSystem>("ModLaplSmoothSystem");
+  LaplacianSystem *sys = MEM_new_zeroed<LaplacianSystem>("ModLaplSmoothSystem");
   sys->numEdges = a_numEdges;
   sys->numLoops = a_numLoops;
   sys->numVerts = a_numVerts;
@@ -435,7 +435,7 @@ void bmo_smooth_laplacian_vert_exec(BMesh *bm, BMOperator *op)
   sys->bm = bm;
   sys->op = op;
 
-  memset_laplacian_system(sys, 0);
+  init_laplacian_system_buffers(sys);
 
   BM_mesh_elem_index_ensure(bm, BM_VERT);
   lambda_factor = BMO_slot_float_get(op->slots_in, "lambda_factor");
