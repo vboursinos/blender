@@ -265,6 +265,23 @@ void bmo_rotate_edges_exec(BMesh *bm, BMOperator *op)
     bm_rotate_edges_shared(bm, op, check_flag, use_ccw, edges_len);
   }
 
+  /* Clear temporary FACE_MARK flags set during simple detection to avoid leaking state. */
+  if (edges_len > 0) {
+    BMEdge **edges = reinterpret_cast<BMEdge **>(
+        BMO_SLOT_AS_BUFFER(BMO_slot_get(op->slots_in, "edges")));
+    for (int i = 0; i < edges_len; i++) {
+      BMEdge *e = edges[i];
+      BMFace *f_pair[2];
+      if (BM_edge_face_pair(e, &f_pair[0], &f_pair[1])) {
+        for (int j = 0; j < 2; j++) {
+          if (f_pair[j] != nullptr && BMO_face_flag_test(bm, f_pair[j], FACE_MARK)) {
+            BMO_face_flag_disable(bm, f_pair[j], FACE_MARK);
+          }
+        }
+      }
+    }
+  }
+
   BMO_slot_buffer_from_enabled_flag(bm, op, op->slots_out, "edges.out", BM_EDGE, EDGE_OUT);
 }
 
