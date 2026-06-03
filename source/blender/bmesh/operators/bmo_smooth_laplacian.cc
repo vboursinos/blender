@@ -130,7 +130,7 @@ static LaplacianSystem *init_laplacian_system(int a_numEdges, int a_numLoops, in
     return nullptr;
   }
 
-  sys->zerola = MEM_new_array_zeroed<bool>(sys->numVerts, "ModLaplSmoothZeloa");
+  sys->zerola = MEM_new_array_zeroed<bool>(sys->numVerts, "ModLaplSmoothZerola");
   if (!sys->zerola) {
     delete_laplacian_system(sys);
     return nullptr;
@@ -186,7 +186,7 @@ static void init_laplacian_matrix(LaplacianSystem *sys)
     }
   }
 
-  uint l_curr_index = 0;
+  size_t l_curr_index = 0;
 
   BM_ITER_MESH (f, &fiter, sys->bm, BM_FACES_OF_MESH) {
     if (!BM_elem_flag_test(f, BM_ELEM_SELECT)) {
@@ -240,7 +240,7 @@ static void fill_laplacian_matrix(LaplacianSystem *sys)
   BMIter fiter;
   int i;
 
-  uint l_curr_index = 0;
+  size_t l_curr_index = 0;
 
   BM_ITER_MESH (f, &fiter, sys->bm, BM_FACES_OF_MESH) {
     if (!BM_elem_flag_test(f, BM_ELEM_SELECT)) {
