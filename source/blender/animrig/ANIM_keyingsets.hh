@@ -173,6 +173,7 @@ void keyingset_info_register(KeyingSetInfo *keyingset_info);
  * Remove the given #KeyingSetInfo from the list of type infos,
  * and also remove the builtin set if appropriate.
  */
+struct Main;
 void keyingset_info_unregister(Main *bmain, KeyingSetInfo *keyingset_info);
 
 void keyingset_infos_exit();
