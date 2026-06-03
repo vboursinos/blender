@@ -8,6 +8,8 @@
  * \brief Helper functions for animation to interact with the RNA system.
  */
 
+#pragma once
+
 #include "BLI_string_ref.hh"
 #include "BLI_vector.hh"
 #include "DNA_action_types.h"

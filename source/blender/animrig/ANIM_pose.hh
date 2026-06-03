@@ -18,6 +18,7 @@ namespace blender {
 struct AnimationEvalContext;
 struct Object;
 struct bAction;
+struct Slot; // Forward declaration to ensure Slot is complete for declarations below
 
 namespace animrig {
 

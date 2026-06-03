@@ -30,7 +30,7 @@ class BoneColor : public blender::BoneColor {
   BoneColor(const BoneColor &other);
   ~BoneColor();
 
-  const ThemeWireColor *effective_color() const;
+  const blender::ThemeWireColor *effective_color() const;
 
   /* Support for storing in a #Set<BoneColor>. */
   bool operator==(const BoneColor &other) const;
