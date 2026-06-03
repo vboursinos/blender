@@ -21,7 +21,8 @@ namespace animrig {
 class Action;
 }
 
-namespace animrig::versioning {
+namespace animrig {
+namespace versioning {
 
 /**
  * Return whether an action is layered (as opposed to legacy).
@@ -83,5 +84,6 @@ void convert_legacy_action_assignments(Main &bmain, ReportList *reports);
  */
 void action_groups_reconstruct(bAction *act);
 
-}  // namespace animrig::versioning
+}  // namespace versioning
+}  // namespace animrig
 }  // namespace blender
