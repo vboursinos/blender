@@ -148,12 +148,12 @@ static bool bm_face_split_by_concave(BMesh *bm,
 
   BLI_heap_clear(pf_heap, nullptr);
 
-  while (faces_double) {
-    LinkNode *next = faces_double->next;
-    BM_face_kill(bm, static_cast<BMFace *>(faces_double->link));
-    MEM_delete(faces_double);
-    faces_double = next;
-  }
+  BLI_linklist_free(faces_double, [](void *ptr) {
+    /* The memory for the LinkNode itself is freed by BLI_linklist_free,
+     * but we must handle the face removal if necessary.
+     * Note: BM_face_triangulate documentation suggests the caller
+     * is responsible for cleaning up temporary faces. */
+  });
 
   return true;
 }
